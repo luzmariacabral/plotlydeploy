@@ -133,10 +133,10 @@ function buildCharts(sample) {
     // 3. Create a variable that holds the washing frequency.
     // function buildMetadata(sample) {
     // d3.json("samples.json").then((data) => {
-    //   var metadata = data.metadata;
-    //   var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
-      var result = resultArray[0];
-      var wfreq = parseFloat(result.wfreq);
+    //var metadata = data.metadata;
+    var wfreqArray = data.metadata.filter(sampleObj => sampleObj.id == sample);
+    var metadata = wfreqArray[0];
+    var wfreq = parseFloat(metadata.wfreq);
     
     // 4. Create the trace for the gauge chart.
     var gaugeData = [
@@ -145,9 +145,9 @@ function buildCharts(sample) {
         value: wfreq,
         type: "indicator",
         mode: "gauge+number",
-        title: { text: "<h3> Belly Button Washing Frequency </h3><br><p> Scrubs per week </p>" },
+        title: { text: "<b> Belly Button Washing Frequency </b><br> Scrubs per week" },
         gauge: {
-          axis: { rrange: [null, 10] },
+          axis: { range: [null, 10] },
           bar: {color: "black"},
           steps: [
             { range: [0, 2], color: "cyan" },
