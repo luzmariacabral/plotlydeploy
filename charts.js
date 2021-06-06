@@ -102,46 +102,32 @@ function buildCharts(sample) {
 
 // Bar and Bubble charts
 // Create the buildCharts function.
-// function buildCharts(sample) {
-//   // Use d3.json to load and retrieve the samples.json file 
-//   d3.json("samples.json").then((data) => {
-    
-
-//     // Deliverable 1 Step 10. Use Plotly to plot the data with the layout. 
-//     Plotly.newPlot(); 
-
-    // 1. Create the trace for the bubble chart.
+// 1. Create the trace for the bubble chart.
     
     var bubbleTrace = {
       x: otuIds,
       y: sampleValues,
       text: text_labels,
+      type: "bubble",
       mode: "markers",
       marker: {
-        color: []
-      }
+        size: sampleValues,
+        color: otuIds
+        //colorscale: "Earth"
+      },
 
-    }
+    };
     
-    var bubbleData = [
-   
-    ];
+    var bubbleData = [bubbleTrace];
 
     // 2. Create the layout for the bubble chart.
-    var chartTitle = {
-      title: "Bacteria Cultures per Sample"
+    var bubbleLayout = {
+      title: "Bacteria Cultures per Sample",
+      xaxis: {title: "OTU ID"},
+      hovermode: `closest`
     };
 
-    d3.json('https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json', 
-    function(figure) {
-    var colorData = [{
-      z: figure.z,
-      colorscale: 'Picnic',
-      type: 'heatmap'
-    }
-  ];
-  var bubbleLayout = {chartTitle, colorData};
-    // 3. Use Plotly to plot the data with the layout.
-    Plotly.newPlot(); 
+  // 3. Use Plotly to plot the data with the layout.
+    Plotly.newPlot('bubble', bubbleData, bubbleLayout); 
   });
 }
