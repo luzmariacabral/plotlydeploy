@@ -127,7 +127,44 @@ function buildCharts(sample) {
       hovermode: `closest`
     };
 
-  // 3. Use Plotly to plot the data with the layout.
+    // 3. Use Plotly to plot the data with the layout.
     Plotly.newPlot('bubble', bubbleData, bubbleLayout); 
+ 
+    // 3. Create a variable that holds the washing frequency.
+    // function buildMetadata(sample) {
+    // d3.json("samples.json").then((data) => {
+    //   var metadata = data.metadata;
+    //   var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
+      var result = resultArray[0];
+      var wfreq = parseFloat(result.wfreq);
+    
+    // 4. Create the trace for the gauge chart.
+    var gaugeData = [
+      {
+        domain: { x: [0,1], y: [0,1] },
+        value: wfreq,
+        type: "indicator",
+        mode: "gauge+number",
+        title: { text: "<h3> Belly Button Washing Frequency </h3><br><p> Scrubs per week </p>" },
+        gauge: {
+          axis: { rrange: [null, 10] },
+          bar: {color: "black"},
+          steps: [
+            { range: [0, 2], color: "cyan" },
+            { range: [2, 4], color: "olive"},
+            { range: [4, 6], color: "plum"},
+            { range: [6, 8], color: "pink" },
+            { range: [8, 10], color: "darkmagenta"}
+          ],
+        },
+      }
+    ];
+    
+    // 5. Create the layout for the gauge chart.
+    var gaugeLayout = { width: 600, height: 450, margin: { t: 0, b: 0} };
+
+    // 6. Use Plotly to plot the gauge data and layout.
+    Plotly.newPlot("gauge", gaugeData, gaugeLayout);
+   
   });
-}
+    };
