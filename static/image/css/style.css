@@ -1,0 +1,10 @@
+body {
+
+    color: #2ddae6;
+}
+
+.jumbotron {
+    background-image: url("../image/belly_button_bacteria.jpg");
+    background-size: cover;
+    height: 100%;
+}
